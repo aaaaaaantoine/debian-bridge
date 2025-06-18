@@ -1,5 +1,5 @@
 ```sh
-sudo apt install brige-utils
+sudo apt install bridge-utils
 ```
 
 ```sh
