@@ -1,6 +1,11 @@
 ## Connexion par pont avec Netctl 
+
+* Prérequis :
 ```sh
 sudo apt install -y  bridge-utils netctl
+```
+
+```sh
 sudo systemctl disable --now NetworkManager
 sudo systemctl disable --now netwoking
 
