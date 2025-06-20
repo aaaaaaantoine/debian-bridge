@@ -1,31 +1,23 @@
+## Connexion par pont avec Netctl 
 ```sh
-sudo apt install bridge-utils
+sudo apt install -y  bridge-utils netctl
+sudo systemctl disable --now NetworkManager
+sudo systemctl disable --now netwoking
+
+sudo nano /etc/netctl/bridge
+
+Description="Bridge connection"
+Interface=br0
+Connection=bridge
+BindsToInterfaces=(enp1s0)
+MACAddress='52:54:00:a8:b9:6b'
+IP=static
+Address='192.168.1.31/24'
+Gateway='192.168.1.1'
+SkipForwardingDelay=yes
 ```
 
 ```sh
-sudo brctl addbr br0
-sudo brctl addif br0 enp1s0
-sudo ifup br0
-```
-
-```sh
-vim /etc/network/interfaces
-auto lo
-iface lo inet loopback
-
-allow-hotplug enp1s0
-
-auto br0
-    iface br0 inet static
-    hwaddress ether 12:34:45:78:90:10
-    address 192.168.1.20
-    netmask 255.255.255.0
-    network 192.168.1.1
-    gateway 192.168.1.1
-    bridge_ports enp1s0
-    bridge_stp off
-    bridge_fd 0
-```
-```sh
-sudo systemctl restart networking# debian-bridge
+sudo netctl enable bridge
+sudo netctl start bridge
 ```
