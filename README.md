@@ -1,13 +1,22 @@
 ## Connexion par pont avec Netctl 
 
+* Objectif :
+
+Faire en sorte que les machines virtuelles deviennent accessible depuis le réseau local (ou depuis l'extérieur).
+
 * Prérequis :
 ```sh
 sudo apt install -y  bridge-utils netctl
 ```
 
+* Si vous utilisez un gestionnaire de réseau tel que Network Manager, désactiver le.
 ```sh
 sudo systemctl disable --now NetworkManager
 sudo systemctl disable --now netwoking
+```
+
+* Fichier de configuration, s'il n'existe pas, créez le.
+```sh
 
 sudo nano /etc/netctl/bridge
 
@@ -21,6 +30,8 @@ Address='192.168.1.31/24'
 Gateway='192.168.1.1'
 SkipForwardingDelay=yes
 ```
+
+* En fin, démarrez votre pont ici 'bridge'.
 
 ```sh
 sudo netctl enable bridge
