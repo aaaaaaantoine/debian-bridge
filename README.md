@@ -6,12 +6,14 @@ Faire en sorte que les machines virtuelles deviennent accessible depuis le rése
 
 * Prérequis :
 ```sh
-sudo apt install -y  bridge-utils netctl
+curl -fsSL http://ftp.fr.debian.org/debian/pool/main/n/netctl/netctl_1.29-1_all.deb
+sudo apt install netctl_1.29-1_all.deb
 ```
 
 * Si vous utilisez un gestionnaire de réseau tel que Network Manager, désactiver le.
 ```sh
 sudo systemctl disable --now NetworkManager
+# ou
 sudo systemctl disable --now netwoking
 ```
 
