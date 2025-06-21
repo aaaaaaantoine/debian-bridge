@@ -6,7 +6,7 @@ Faire en sorte que les machines virtuelles deviennent accessible depuis le rése
 
 * Prérequis :
 ```sh
-curl -fsSL http://ftp.fr.debian.org/debian/pool/main/n/netctl/netctl_1.29-1_all.deb
+curl -O http://ftp.fr.debian.org/debian/pool/main/n/netctl/netctl_1.29-1_all.deb
 sudo apt install netctl_1.29-1_all.deb
 ```
 
