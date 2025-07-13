@@ -2,7 +2,8 @@
 
 * Objectif :
 
-Faire en sorte que les machines virtuelles deviennent accessible depuis le réseau local (ou depuis l'extérieur).
+* Faire en sorte que les machines virtuelles deviennent accessible depuis le réseau local (ou depuis l'extérieur).
+* Testé uniquement sur Debian 13 Trixie
 
 * Prérequis :
 ```sh
