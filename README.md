@@ -1,6 +1,6 @@
 ## Connexion par pont avec Netctl 
 
-* Objectif :
+Objectif :
 
 * Faire en sorte que les machines virtuelles deviennent accessible depuis le réseau local (ou depuis l'extérieur).
 * Testé uniquement sur Debian 13 Trixie
