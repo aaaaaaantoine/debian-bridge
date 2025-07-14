@@ -1,42 +1,61 @@
-## Connexion par pont avec Netctl 
+## Connexion par pont avec "systend-netword"
 
 Objectif :
 
+* Cette configuration bridge parmanente.
 * Faire en sorte que les machines virtuelles deviennent accessible depuis le réseau local (ou depuis l'extérieur).
-* Testé uniquement sur Debian 13 Trixie
+* Testé sur Debian 12 et 13
 
-* Prérequis :
-```sh
-curl -O http://ftp.fr.debian.org/debian/pool/main/n/netctl/netctl_1.29-1_all.deb
-sudo apt install netctl_1.29-1_all.deb
-```
 
-* Si vous utilisez un gestionnaire de réseau tel que Network Manager, désactiver le.
+1) Si vous utilisez un gestionnaire de réseau tel que Network Manager, désactiver le.
 ```sh
 sudo systemctl disable --now NetworkManager
 # ou
 sudo systemctl disable --now netwoking
 ```
 
-* Fichier de configuration, s'il n'existe pas, créez le.
+2) Lancez le service systemd:
 ```sh
-
-sudo nano /etc/netctl/bridge
-
-Description="Bridge connection"
-Interface=br0
-Connection=bridge
-BindsToInterfaces=(enp1s0)
-MACAddress='52:54:00:a8:b9:6b'
-IP=static
-Address='192.168.1.31/24'
-Gateway='192.168.1.1'
-SkipForwardingDelay=yes
+sudo systemctl enable systemd-networkd
+sudo systemctl start systemd-networkd
 ```
 
-* En fin, démarrez votre pont ici 'bridge'.
+3) Fichiers de configuration:
 
 ```sh
-sudo netctl enable bridge
-sudo netctl start bridge
+# nano /etc/systemd/network/10-br0.netdev
+
+[NetDev]
+Name=br0
+Kind=bridge
+```
+```sh
+# nano /etc/systemd/network/10-br0.network
+
+[Match]
+Name=br0
+
+[Network]
+Address=192.168.1.50/24
+Gateway=192.168.1.1
+DNS=192.168.1.1
+```
+```sh
+#nano /etc/systemd/network/20-eth0.network
+[Match]
+Name=enp1s0 #C'est le nom donné lors de la commande "ip a" à modifier si différent.
+
+[Network]
+Bridge=br0
+```
+
+4) En fin, redémarrez le service:
+
+```sh
+sudo systemctl restart systemd-networkd
+```
+
+5) Vérifiez que la configuration fonctionne bien
+```sh
+networkctl status
 ```
