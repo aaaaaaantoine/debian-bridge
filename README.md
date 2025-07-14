@@ -1,9 +1,9 @@
-## Connexion par pont avec "systend-netword"
+## Créer un Brdige permanent avec "systend-netword"
 
 Objectif :
 
-* Cette configuration bridge parmanente.
-* Faire en sorte que les machines virtuelles deviennent accessible depuis le réseau local (ou depuis l'extérieur).
+* Créer une configuration bridge parmanente.
+* Faire en sorte que les machines virtuelles deviennent accessible depuis le réseau local (et/ou depuis l'extérieur).
 * Testé sur Debian 12 et 13
 
 
